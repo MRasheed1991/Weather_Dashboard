@@ -1,3 +1,10 @@
+const onSubmit = (event) => {
+  event.preventDefault();
+  const cityName = $("#city-input").val();
+  console.log(cityName);
+};
+$("#city-search-form").on("submit", onSubmit);
+
 /*const renderCities = (citiesFromLocalStorage) => {
   // For each city construct a list item and append to the list group
 };
