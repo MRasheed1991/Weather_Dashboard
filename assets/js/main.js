@@ -1,4 +1,4 @@
-const renderCities = (citiesFromLocalStorage) => {
+/*const renderCities = (citiesFromLocalStorage) => {
   // For each city construct a list item and append to the list group
 };
 
@@ -100,3 +100,4 @@ $("#target-your-list-items").click(onClick);
 $("#your-form-id").submit(onSubmit);
 
 $(document).ready(onLoad);
+*/
