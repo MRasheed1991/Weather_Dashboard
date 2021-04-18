@@ -17,7 +17,25 @@ const onSubmit = (event) => {
 
   localStorage.setItem("cities", JSON.stringify(cities));
 };
+
+const renderCitiesFromLocalStorage = () => {
+  const cities = getFromLocalStorage();
+  const ul = $("<ul>").addClass("list-group");
+  const appendListItemToUl = (city) => {
+    const li = `<li class="list-group-item">${city}</li>`;
+    ul.append(li);
+  };
+  cities.forEach(appendListItemToUl);
+  $("#searched-cities").append(ul);
+};
+
+const onReady = () => {
+  renderCitiesFromLocalStorage();
+};
+
 $("#city-search-form").on("submit", onSubmit);
+
+$(document).ready(onReady);
 
 /*const renderCities = (citiesFromLocalStorage) => {
   // For each city construct a list item and append to the list group
