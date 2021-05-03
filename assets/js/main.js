@@ -43,7 +43,7 @@ const onSubmit = async (event) => {
 
   $("#city-input").val("");
 
-  const url = `http://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${API_KEY}`;
+  const url = `http://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=imperial&appid=${API_KEY}`;
   const data = await fetchData(url);
 
   const currentDayData = transformData(data);
@@ -75,7 +75,7 @@ const renderCitiesFromLocalStorage = () => {
     if (target.is("li")) {
       const cityName = target.data("city");
 
-      const url = `http://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${API_KEY}`;
+      const url = `http://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=imprerial&appid=${API_KEY}`;
 
       const data = await fetchData(url);
 
@@ -98,7 +98,7 @@ const renderCurrentDayCard = (data) => {
           ${data.cityName}(${data.date})<img src="${data.iconURL}"/>
          
         </h2>
-        <div class="py-2">Temperature:${data.temperature} &deg F</div>
+        <div class="py-2">Temperature:${data.temperature}&degF</div>
         <div class="card-text py-2">Humidity: ${data.humidity}%</div>
         <div class="py-2">Wing Speed: ${data.windSpeed} MPH</div>
         <div class="py-2">UV Index:</div>
