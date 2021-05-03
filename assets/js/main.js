@@ -17,6 +17,17 @@ const fetchData = async (url) => {
   }
 };
 
+const transformData = (data) => {
+  return {
+    cityName: data.name,
+    temperature: data.main.temp,
+    humidity: data.main.humidity,
+    windSpeed: data.wind.speed,
+    date: moment.unix(data.dt).format("MM/DD/YYYY"),
+    iconURL: `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`,
+  };
+};
+
 const onSubmit = async (event) => {
   event.preventDefault();
 
@@ -30,11 +41,17 @@ const onSubmit = async (event) => {
 
   renderCitiesFromLocalStorage();
 
-  $("#city-input").val();
+  $("#city-input").val("");
 
   const url = `http://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${API_KEY}`;
   const data = await fetchData(url);
+
+  const currentDayData = transformData(data);
+
+  renderCurrentDayCard(currentDayData);
+
   console.log(data);
+  console.log(currentDayData);
 };
 
 const renderCitiesFromLocalStorage = () => {
@@ -59,12 +76,36 @@ const renderCitiesFromLocalStorage = () => {
       const cityName = target.data("city");
 
       const url = `http://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${API_KEY}`;
+
       const data = await fetchData(url);
+
+      const currentDayData = transformData(data);
+
+      renderCurrentDayCard(currentDayData);
+
       console.log(data);
     }
   };
   ul.on("click", getDataByCityName);
   $("#searched-cities").append(ul);
+};
+
+const renderCurrentDayCard = (data) => {
+  $("#current-day").empty();
+  const card = `<div class="card current-day">
+      <div class="card-body">
+        <h2 class="card-title">
+          ${data.cityName}(${data.date})<img src="${data.iconURL}"/>
+         
+        </h2>
+        <div class="py-2">Temperature:${data.temperature} &deg F</div>
+        <div class="card-text py-2">Humidity: ${data.humidity}%</div>
+        <div class="py-2">Wing Speed: ${data.windSpeed} MPH</div>
+        <div class="py-2">UV Index:</div>
+      </div>
+    </div>`;
+
+  $("#current-day").append(card);
 };
 
 const onReady = () => {
