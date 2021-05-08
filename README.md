@@ -15,5 +15,5 @@ As a developer I was tasked with building an app that displays current weather a
 
 ## ScreenShot
 
-![Screenshot (1)](./assets\screenshots\Screenshot-1.png)
-![Screenshot (2)](./assets\screenshots\Screenshot-2.png)
+![Screenshot (1)](./assets/screenshots/Screenshot-1.png)
+![Screenshot (2)](./assets/screenshots/Screenshot-2.png)
